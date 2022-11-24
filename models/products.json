@@ -1,32 +1,31 @@
 [
   {
     "id": "1",
-    "_id": 1,
     "name": "iphone 5x",
     "price": 3400
   },
   {
-    "_id": 2,
+    "id": "2",
     "name": "macbook Pro 15",
     "price": 12000
   },
   {
-    "_id": 3,
+    "id": "3",
     "name": "macbook Air 13",
     "price": 10000
   },
   {
-    "_id": 4,
+    "id": "4",
     "name": "samsung note 5",
     "price": 11000
   },
   {
-    "_id": 5,
+    "id": "5",
     "name": "canon 5dMark3",
     "price": 19000
   },
   {
-    "_id": 6,
+    "id": "6",
     "name": "Nikon D800",
     "price": 185000
   }

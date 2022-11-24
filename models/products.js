@@ -24,25 +24,33 @@ const { v4 } = require("uuid");
 const productPath = path.resolve("./models/products.json");
 
 async function listProducts() {
-  try {
-    const products = await fs.readFile(productPath, "utf8");
-    const result = await JSON.parse(products);
-    return result;
-  } catch (error) {
-    console.error(error);
-    throw new Error(error);
-  }
+  const products = await fs.readFile(productPath, "utf8");
+  const result = await JSON.parse(products);
+  return result;
+
+  // try {
+  //   const products = await fs.readFile(productPath, "utf8");
+  //   const result = await JSON.parse(products);
+  //   return result;
+  // } catch (error) {
+  //   console.error(error);
+  //   throw new Error(error);
+  // }
 }
 
 async function getProductById(id) {
-  try {
-    const products = await listProducts();
-    const result = products.find((item) => item.id === id.toString());
-    return result;
-  } catch (error) {
-    console.error(error);
-    throw new Error(error);
-  }
+  const products = await listProducts();
+  const result = products.find((item) => item.id === id.toString());
+  return result;
+
+  // try {
+  //   const products = await listProducts();
+  //   const result = products.find((item) => item.id === id.toString());
+  //   return result;
+  // } catch (error) {
+  //   console.error(error);
+  //   throw new Error(error);
+  // }
   //   return contact;
 }
 

@@ -2,7 +2,7 @@ const express = require("express");
 
 const {
   listProducts,
-  // getProductById,
+  getProductById,
   // removeProduct,
   // addProduct,
 } = require("../../models/products");
@@ -26,9 +26,18 @@ router.get("/", async (req, res, next) => {
 
 router.get("/:id", async (req, res, next) => {
   try {
-    // const product = await getProductById();
-  } catch (error) {}
-  res.json({ message: "template message" });
+    const { id } = req.params;
+    const product = await getProductById(id);
+    res.json({
+      status: "succes",
+      code: 200,
+      result: product,
+    });
+  } catch (error) {
+    res
+      .status(404)
+      .json({ status: "error", code: 404, messege: "Server error" });
+  }
 });
 
 router.post("/", async (req, res, next) => {
