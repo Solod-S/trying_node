@@ -55,39 +55,72 @@ async function getProductById(id) {
 }
 
 async function removeProduct(id) {
-  const prewProducts = await listProducts();
-  const newProducts = await prewProducts.filter(
-    (product) => product.id !== id.toString()
-  );
-  try {
+  const productForDell = await getProductById(id);
+  if (productForDell) {
+    const prewProducts = await listProducts();
+    const newProducts = await prewProducts.filter(
+      (product) => product.id !== id.toString()
+    );
     await fs.writeFile(productPath, JSON.stringify(newProducts));
     console.log(`Product with id: ${id} was successfully deleted!`);
-    const updatedProducts = await listProducts();
-    return updatedProducts;
-  } catch (error) {
-    console.error(error);
-    throw new Error(error);
+    return productForDell;
+  } else {
+    return null;
   }
+
+  // const prewProducts = await listProducts();
+  // const newProducts = await prewProducts.filter(
+  //   (product) => product.id !== id.toString()
+  // );
+  // try {
+  //   await fs.writeFile(productPath, JSON.stringify(newProducts));
+  //   console.log(`Product with id: ${id} was successfully deleted!`);
+  //   const updatedProducts = await listProducts();
+  //   return updatedProducts;
+  // } catch (error) {
+  //   console.error(error);
+  //   throw new Error(error);
+  // }
 }
 
-async function addProduct(name, price) {
+async function addProduct({ name, price }) {
   const products = await listProducts();
-  try {
-    const newProduct = { _id: v4(), name, price };
-    const updateProducts = [...products, newProduct];
-    await fs.writeFile(productPath, JSON.stringify(updateProducts));
-    console.table(`New product: ${name}, email: ${price} = was created!`);
-    const updatedProduct = await listProducts();
-    return updatedProduct;
-  } catch (error) {
-    console.log(error);
-    throw new Error(error);
+  const newProduct = { id: v4(), name, price };
+  const updateProducts = [...products, newProduct];
+  await fs.writeFile(productPath, JSON.stringify(updateProducts));
+  console.table(`New product: ${name}, price: ${price} = was created!`);
+  const updatedProduct = await listProducts();
+  return updatedProduct;
+
+  //  try {
+  //    const newProduct = { _id: v4(), name, price };
+  //    const updateProducts = [...products, newProduct];
+  //    await fs.writeFile(productPath, JSON.stringify(updateProducts));
+  //    console.table(`New product: ${name}, price: ${price} = was created!`);
+  //    const updatedProduct = await listProducts();
+  //    return updatedProduct;
+  //  } catch (error) {
+  //    console.log(error);
+  //    throw new Error(error);
+  //  }
+}
+async function updateProduct(id, { name, price }) {
+  const allProducts = await listProducts();
+  const productIndex = allProducts.findIndex((product) => product.id === id);
+  if (productIndex !== -1) {
+    allProducts[productIndex].price = price;
+    allProducts[productIndex].name = name;
+
+    await fs.writeFile(productPath, JSON.stringify(allProducts));
+    return allProducts[productIndex];
+  } else {
+    return null;
   }
 }
-
 module.exports = {
   listProducts,
   getProductById,
   removeProduct,
   addProduct,
+  updateProduct,
 };
