@@ -1,0 +1,9 @@
+[
+  { "name": "iphone 5x", "price": 3400, "rating": 5 },
+  { "name": "macbook Pro 15", "price": 12000, "rating": 5 },
+  { "name": "macbook Air 13", "price": 10000, "rating": 4 },
+  { "name": "samsung note 5", "price": 11000, "rating": 3 },
+  { "name": "canon 5dMark3", "price": 19000, "rating": 3 },
+  { "name": "ipad", "price": 3335, "rating": 3 },
+  { "name": "Iwatch", "price": 5355, "rating": 3 }
+]
