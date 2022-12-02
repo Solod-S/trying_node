@@ -1,10 +1,16 @@
 const { Product } = require("../../models");
 const createError = require("http-errors");
 
-const updateById = async (req, res) => {
+const updateStatus = async (req, res) => {
   const { id } = req.params;
-
-  const result = await Product.findByIdAndUpdate(id, req.body, { new: true });
+  const { status } = req.body;
+  const result = await Product.findByIdAndUpdate(
+    id,
+    { status },
+    {
+      new: true,
+    }
+  );
   if (!result) {
     throw createError(404, `Product with id ${id} not found`);
   }
@@ -15,4 +21,4 @@ const updateById = async (req, res) => {
   });
 };
 
-module.exports = updateById;
+module.exports = updateStatus;

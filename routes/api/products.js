@@ -1,12 +1,17 @@
 const express = require("express");
 const { products: ctrl } = require("../../controllers");
-const { productSchema } = require("../../schemas");
+const { joiSchema, statusJoiSchema } = require("../../models/product");
 const { validation, tryCatch } = require("../../middlewares");
 
 const router = express.Router();
 router.get("/", tryCatch(ctrl.getAll));
 router.get("/:id", tryCatch(ctrl.getById));
-router.post("/", validation(productSchema), tryCatch(ctrl.add));
+router.post("/", validation(joiSchema), tryCatch(ctrl.add));
 router.delete("/:id", tryCatch(ctrl.dell));
-router.put("/:id", validation(productSchema), tryCatch(ctrl.updateById));
+router.put("/:id", validation(joiSchema), tryCatch(ctrl.updateStatus));
+router.patch(
+  "/:id/status",
+  validation(statusJoiSchema),
+  tryCatch(ctrl.updateById)
+);
 module.exports = router;

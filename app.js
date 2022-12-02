@@ -1,10 +1,10 @@
 const express = require("express");
 const logger = require("morgan");
 const cors = require("cors");
-
 const productRouter = require("./routes/api/products");
-
 const app = express();
+require("dotenv").config();
+// в внутренее окружение заносим параметры из .env
 
 const formatsLogger = app.get("env") === "development" ? "dev" : "short";
 

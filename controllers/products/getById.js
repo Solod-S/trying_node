@@ -1,8 +1,11 @@
-const { getProductById } = require("../../models/products");
+const { Product } = require("../../models");
 const createError = require("http-errors");
 const getById = async (req, res) => {
   const { id } = req.params;
-  const product = await getProductById(id);
+  console.log(`id`);
+  // const product = await Product.findById(id);
+  // поиск по совпадению
+  const product = await Product.findOne({ _id: id });
   if (!product) {
     throw createError(404, `Product with id ${id} not found`);
   }
