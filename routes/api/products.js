@@ -1,9 +1,11 @@
 const express = require("express");
+
 const { products: ctrl } = require("../../controllers");
-const { joiSchema, statusJoiSchema } = require("../../models/product");
 const { validation, tryCatch } = require("../../middlewares");
+const { joiSchema, statusJoiSchema } = require("../../models/product");
 
 const router = express.Router();
+
 router.get("/", tryCatch(ctrl.getAll));
 router.get("/:id", tryCatch(ctrl.getById));
 router.post("/", validation(joiSchema), tryCatch(ctrl.add));
