@@ -1,3 +1,4 @@
 const signUp = require("./signUp");
 const signIn = require("./signIn");
-module.exports = { signUp, signIn };
+const getCurrent = require("./getCurrent");
+module.exports = { signUp, signIn, getCurrent };
