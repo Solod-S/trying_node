@@ -33,6 +33,12 @@ const productSchema = Schema(
       match: codeRegExp,
       // регулярное выражение, строка начинаеться с числа от 0 до 9 их будет 9 штук в строке
     },
+    owner: {
+      type: Schema.Types.ObjectId,
+      ref: "user",
+      required: true,
+    },
+    // связываем коллекции (чем связываем, какую коллекцию)
   },
 
   { versionKey: false, timestamps: true }

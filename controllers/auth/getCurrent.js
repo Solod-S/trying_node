@@ -1,6 +1,8 @@
-const { User } = require("../../models");
-
 const getCurrent = async (req, res) => {
-  console.log(req.user);
+  const { name, email } = req.user;
+  console.log(name, email);
+  res
+    .status(200)
+    .json({ status: "success", code: 200, data: { user: { name, email } } });
 };
 module.exports = getCurrent;

@@ -27,10 +27,11 @@ const auth = async (req, res, next) => {
     }
     const { id } = jwt.verify(token, SECRET_KEY);
     // у нас в jwt.sign зашит payload ={}
-    const user = await User.findOne({ id });
-    if (!user) {
+    const user = await User.findOne({ _id: id });
+    if (!user || !user.token) {
       throw createError(401, "Not authorized");
     }
+
     req.user = user;
     //   прикрепляем нашего пользовалетя к объекту запроса
     next();
