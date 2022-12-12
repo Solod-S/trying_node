@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <form id="fileForm">
+      <label for="image" enctype="multipart/form-data">
+        File add
+        <input type="file" name="image" id="file" multiple />
+      </label>
+      <button type="submit">Submit</button>
+    </form>
+    <script>
+      const form = document.querySelector("#fileForm");
+
+      function fileSubmin(e) {
+        e.preventDefault();
+        const { image } = this.elements;
+        console.log(file.files[0]);
+        const data = new FormData();
+        data.append("image", image.files[0]);
+        console.log(data);
+      }
+
+      form.addEventListener("submit", fileSubmin);
+    </script>
+  </body>
+</html>

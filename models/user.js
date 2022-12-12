@@ -22,6 +22,10 @@ const userSchema = Schema(
       type: String,
       default: null,
     },
+    avatarURL: {
+      type: String,
+      required: true,
+    },
   },
   { versionKey: false, timestamps: true }
   // убирает версию + добавляет настройки когда был создан и обновлен);
