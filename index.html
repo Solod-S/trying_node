@@ -27,6 +27,16 @@
       }
 
       form.addEventListener("submit", fileSubmin);
+
+      const date1 = new Date(2021, 0, 32);
+      console.log(date1);
+      console.log(date1.getDate());
+      // возвращает какой это день в месяце
+      const date2 = new Date(2021, 2, 0);
+      console.log(date2);
+      // возвращает последний день февраля (нулевой день марта)
+      console.log(date2.getDate());
+      console.log(parseInt(2008) === 2008.8);
     </script>
   </body>
 </html>
