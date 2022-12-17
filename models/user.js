@@ -26,6 +26,16 @@ const userSchema = Schema(
       type: String,
       required: true,
     },
+    verify: {
+      type: Boolean,
+      default: false,
+    },
+    // показывает подтвердил человек свой имейл
+    verifyToken: {
+      type: String,
+      required: [true, " Verify token is required"],
+    },
+    // код подтверждения который будет приходить на почту
   },
   { versionKey: false, timestamps: true }
   // убирает версию + добавляет настройки когда был создан и обновлен);
@@ -47,7 +57,15 @@ userSchema.methods.setPassword = function (password) {
 userSchema.methods.comparePassword = function (password) {
   return bcrypt.compareSync(password, this.password);
 };
+const joiReverifyEmailSchema = Joi.object({
+  email: Joi.string().required(),
+});
 
 const User = model("user", userSchema);
 
-module.exports = { User, joiSignUpSchema, joiLogInSchema };
+module.exports = {
+  User,
+  joiSignUpSchema,
+  joiLogInSchema,
+  joiReverifyEmailSchema,
+};
